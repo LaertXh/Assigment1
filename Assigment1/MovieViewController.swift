@@ -60,7 +60,7 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         cell.titleLabel.text = title
         cell.synapsisLabel.text = synopsis
         
-        let baseURL = "https://image.tmdb.org/t/p/w185"
+        let baseURL = "https://image.tmdb.org/t/p/w300"
         let posterPath = movie["poster_path"] as! String
         let posterURL = URL(string: baseURL  + posterPath)
         
@@ -72,14 +72,27 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
+        
+        
+        //Find selected movies
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)!
+        let movie = movies[indexPath.row]
+        
+        //pass the selected movie to the details view controller
+        let detailsViewController = segue.destination as! MovieDetailsViewController
+        detailsViewController.movie = movie
+        
+        tableView.deselectRow(at: indexPath, animated:true)
     }
-    */
+    
+    
 
 }
